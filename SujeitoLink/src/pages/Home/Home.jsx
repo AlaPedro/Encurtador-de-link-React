@@ -3,13 +3,29 @@ import './home.css'
 import Menu from '../../components/menu'
 import { useState } from 'react'
 import LinkItem from '../../components/LinkItem'
+import api from '../../services/api'
 
 function Home() {
   const [link, setLink] = useState('')
+  const [data, setData] = useState({})
   const [showModal, setShowModal] = useState(false)
 
-  function handleShortLink() {
-    setShowModal(true)
+  async function handleShortLink() {
+
+    try {
+      const response = await api.post('/shorten', {
+        long_url: link
+      })
+
+      setData(response.data)
+      setShowModal(true)
+
+      setLink('')
+
+    } catch {
+      alert('ops, parece que algo deu errado')
+      setLink('')
+    }
   }
 
   return (
@@ -39,6 +55,7 @@ function Home() {
       {showModal && (
         <LinkItem
           closeModal={() => setShowModal(false)}
+          content={data}
         />
       )}
     </div>
