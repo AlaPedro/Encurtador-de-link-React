@@ -52,7 +52,7 @@ function MeusLinks() {
 
             {emptyList && (
                 <div className='links-item'>
-                    <h1 className='empty-text'> Sua lista está vazia!</h1>
+                    <h1 className='empty-text'> Sua lista está vazia...</h1>
                 </div>
             )}
 
